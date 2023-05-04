@@ -132,17 +132,15 @@ public class LinearSystemSolver extends JFrame {
 		panel.add(dimentions);
 		dimentions.setColumns(10);
 		
-		JButton solve = new JButton("Solve");
-		solve.addActionListener(new ActionListener() {
+		JButton fill = new JButton("Solve");
+		fill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String dime = dimentions.getText().toString();
 				if(!dime.isEmpty() && (gaussBox.isSelected()||jacobiBox.isSelected())) {
 					int dim = Integer.valueOf(dime);
 					boolean jacoOrGauss = gaussBox.isSelected()?true:false;
 					double matrix[][] = new double[dim][dim+1];
-					
-					matrix = fillMatrix(dim);
-					
+					matrix = InputFrame.matrix;
 					if(jacoOrGauss) {
 						GaussSeidel gauss = new GaussSeidel();
 						String gaussResult = gauss.gaussSolver(matrix, dim);
@@ -169,8 +167,8 @@ public class LinearSystemSolver extends JFrame {
 				return matrix;
 			}
 		});
-		solve.setBounds(320, 254, 127, 23);
-		panel.add(solve);
+		fill.setBounds(457, 254, 127, 23);
+		panel.add(fill);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(104, 189, 357, 2);
@@ -179,6 +177,20 @@ public class LinearSystemSolver extends JFrame {
 		JSeparator separator_1_1 = new JSeparator();
 		separator_1_1.setBounds(150, 25, 311, 2);
 		panel.add(separator_1_1);
+		
+		JButton solve_1 = new JButton("Fill the Matrix");
+		solve_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String dime = dimentions.getText().toString();
+				if(!dime.isEmpty()) {
+					int dim = Integer.valueOf(dime);
+					new InputFrame(dim);
+				}
+					
+			}
+		});
+		solve_1.setBounds(320, 254, 127, 23);
+		panel.add(solve_1);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1);
